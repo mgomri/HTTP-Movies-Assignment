@@ -15,7 +15,7 @@ export const UpdateForm = (props) => {
     useEffect(() =>{
         axios.get(`http://localhost:5000/api/movies/${params.id}`)
              .then(res => setMovie(res.data))
-             .catch(res => console.log(res))
+             .catch(err => console.log(err))
     }, []);
     
     const handleChange = e => {
@@ -32,7 +32,9 @@ export const UpdateForm = (props) => {
         e.preventDefault();
         axios.put(`http://localhost:5000/api/movies/${params.id}`, movie)
         .then(res => {
-            props.setMovieList(res.data);
+            
+            console.log(res);
+            props.getMovieList();
             history.push(`/movies/${params.id}`)
         })
         .catch(err => console.log(err));
